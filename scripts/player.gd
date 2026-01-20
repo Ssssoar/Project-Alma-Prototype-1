@@ -10,19 +10,19 @@ func _process(_delta: float) -> void:
 	movement()
 
 func movement():
-	var movement_vector = process_input()
+	var movement_vector = get_input()
 	if movement_vector == Vector2i.ZERO: return
 	set_sprite(movement_vector)
 	move_in_direction(movement_vector)
 
-func process_input() -> Vector2i:
-	if Input.is_action_just_pressed("UP"):
+func get_input() -> Vector2i:
+	if InputProcessor.up_input == Enums.Button_State.PRESSED:
 		return Vector2i.UP
-	if Input.is_action_just_pressed("DOWN"):
+	if InputProcessor.down_input == Enums.Button_State.PRESSED:
 		return Vector2i.DOWN
-	if Input.is_action_just_pressed("LEFT"):
+	if InputProcessor.left_input == Enums.Button_State.PRESSED:
 		return Vector2i.LEFT
-	if Input.is_action_just_pressed("RIGHT"):
+	if InputProcessor.right_input == Enums.Button_State.PRESSED:
 		return Vector2i.RIGHT
 	return Vector2i.ZERO
 

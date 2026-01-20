@@ -15,6 +15,11 @@ run/main_scene="uid://thld0yjldq8m"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Enums="*res://scripts/enums.gd"
+InputProcessor="*res://scripts/input_processor.gd"
+
 [file_customization]
 
 folder_colors={
