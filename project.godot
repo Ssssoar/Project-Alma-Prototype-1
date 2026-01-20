@@ -15,6 +15,15 @@ run/main_scene="uid://thld0yjldq8m"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "blue",
+"res://resources/": "yellow",
+"res://scenes/": "gray",
+"res://scripts/": "red"
+}
+
 [input]
 
 UP={
