@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=4 uid="uid://thld0yjldq8m"]
+
+[ext_resource type="TileSet" uid="uid://s2b3o3hacr6p" path="res://resources/grounds.tres" id="1_weg0l"]
+[ext_resource type="Script" uid="uid://dxpxvksl7nalc" path="res://resources/player.gd" id="2_r851v"]
+[ext_resource type="Texture2D" uid="uid://eijvf5o68pxg" path="res://resources/10555.png" id="3_eqa43"]
+
+[node name="World" type="Node2D"]
+
+[node name="Spaces" type="TileMapLayer" parent="."]
+position = Vector2(20, 26)
+tile_map_data = PackedByteArray("AAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAMAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAA=")
+tile_set = ExtResource("1_weg0l")
+
+[node name="Entities" type="TileMapLayer" parent="."]
+position = Vector2(20, 26)
+tile_map_data = PackedByteArray("AAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAMAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAA=")
+tile_set = ExtResource("1_weg0l")
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("floor_tile_map", "sprite_node")]
+position = Vector2(405, 306)
+script = ExtResource("2_r851v")
+floor_tile_map = NodePath("../Spaces")
+sprite_node = NodePath("Sprite")
+up_sprite_num = 1
+left_sprite_num = 2
+right_sprite_num = 3
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("3_eqa43")
+hframes = 4
