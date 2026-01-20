@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://thld0yjldq8m"]
+[gd_scene load_steps=6 format=4 uid="uid://thld0yjldq8m"]
 
 [ext_resource type="TileSet" uid="uid://s2b3o3hacr6p" path="res://resources/grounds.tres" id="1_4wyf3"]
+[ext_resource type="Script" uid="uid://bsq0fjtjk068s" path="res://scripts/grid_entity_tracker.gd" id="2_71j4m"]
 [ext_resource type="Script" uid="uid://dxpxvksl7nalc" path="res://scripts/player.gd" id="2_k0juu"]
 [ext_resource type="Texture2D" uid="uid://eijvf5o68pxg" path="res://assets/10555.png" id="3_71j4m"]
+[ext_resource type="Script" uid="uid://b7gr3d5tsrgus" path="res://scenes/direction_sprite_switcher.gd" id="4_k0juu"]
 
 [node name="World" type="Node2D"]
 
@@ -10,22 +12,36 @@
 position = Vector2(20, 26)
 tile_map_data = PackedByteArray("AAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAMAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAA=")
 tile_set = ExtResource("1_4wyf3")
-
-[node name="Entities" type="TileMapLayer" parent="."]
-position = Vector2(20, 26)
-tile_map_data = PackedByteArray("AAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAMAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAA=")
-tile_set = ExtResource("1_4wyf3")
+script = ExtResource("2_71j4m")
 
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("sprite_node", "floor_tile_map")]
 position = Vector2(405, 306)
 script = ExtResource("2_k0juu")
 sprite_node = NodePath("Sprite")
-up_sprite_num = 1
-left_sprite_num = 2
-right_sprite_num = 3
 floor_tile_map = NodePath("../Spaces")
+team = 1
 
 [node name="Sprite" type="Sprite2D" parent="Player"]
 scale = Vector2(3.135, 3.135)
 texture = ExtResource("3_71j4m")
 hframes = 4
+script = ExtResource("4_k0juu")
+up_sprite_num = 1
+left_sprite_num = 2
+right_sprite_num = 3
+
+[node name="Player2" type="Node2D" parent="." node_paths=PackedStringArray("sprite_node", "floor_tile_map")]
+position = Vector2(850, 381)
+script = ExtResource("2_k0juu")
+sprite_node = NodePath("Sprite")
+floor_tile_map = NodePath("../Spaces")
+team = 1
+
+[node name="Sprite" type="Sprite2D" parent="Player2"]
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("3_71j4m")
+hframes = 4
+script = ExtResource("4_k0juu")
+up_sprite_num = 1
+left_sprite_num = 2
+right_sprite_num = 3

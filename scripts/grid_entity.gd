@@ -1,10 +1,15 @@
 class_name GridEntity extends Node2D
 
 @export var floor_tile_map: TileMapLayer
+@export var team: int ##where 0 means no team
 var current_grid_pos: Vector2i 
+
+signal moved_to_tile(GridEntity,Vector2i)
 
 func _ready() -> void:
 	current_grid_pos = set_current_grid_pos_from_transform()
+	if floor_tile_map is GridEntityTracker:
+		floor_tile_map.start_tracking_entity(self)
 
 func set_current_grid_pos_from_transform() -> Vector2i:
 	var local_pos = floor_tile_map.to_local(global_position)
@@ -29,3 +34,4 @@ func move_to_pos(target_grid_position: Vector2i, ignore_impassable_terrain: bool
 	current_grid_pos = target_grid_position
 	var position_as_local_to_map = floor_tile_map.map_to_local(current_grid_pos)
 	global_position = floor_tile_map.to_global(position_as_local_to_map)
+	moved_to_tile.emit(self,target_grid_position)
