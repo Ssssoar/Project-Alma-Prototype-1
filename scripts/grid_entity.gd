@@ -1,7 +1,7 @@
 class_name GridEntity extends Node2D
 
 @export var floor_tile_map: TileMapLayer
-@export var team: int ##where 0 means no team
+@export_range(0,3) var team: int ##where 0 means no team
 var current_grid_pos: Vector2i 
 
 signal moved_to_tile(GridEntity,Vector2i)
@@ -22,7 +22,10 @@ func can_move_in_vector(vector: Vector2i) -> bool:
 func can_move_to_tile(tile_pos: Vector2i) -> bool:
 	var target_tile_data = floor_tile_map.get_cell_tile_data(tile_pos)
 	if target_tile_data == null: return false
-	return target_tile_data.get_custom_data("passable")
+	var is_target_tile_passable = target_tile_data.get_custom_data("passable")
+	var target_tile_team = target_tile_data.get_custom_data("team")
+	var is_target_tile_compatible_team = (target_tile_team == team) || (target_tile_team == 0) || (team == 0)
+	return is_target_tile_passable && is_target_tile_compatible_team
 
 func move_in_direction(direction: Vector2i, ignore_impassable_terrain: bool = false):
 	var target_position = current_grid_pos + direction

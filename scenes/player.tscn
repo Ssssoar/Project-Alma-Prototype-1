@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba5qemctve1x5"]
+
+[ext_resource type="Script" uid="uid://dxpxvksl7nalc" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://eijvf5o68pxg" path="res://assets/10555.png" id="2_dqkch"]
+[ext_resource type="Script" uid="uid://b7gr3d5tsrgus" path="res://scripts/direction_sprite_switcher.gd" id="3_qlg0r"]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("sprite_node", "floor_tile_map")]
+script = ExtResource("1_qhqgy")
+player_number = 2
+sprite_node = NodePath("Sprite")
+floor_tile_map = NodePath("")
+team = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("2_dqkch")
+hframes = 4
+script = ExtResource("3_qlg0r")
+up_sprite_num = 1
+left_sprite_num = 2
+right_sprite_num = 3

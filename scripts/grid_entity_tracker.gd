@@ -7,6 +7,7 @@ var entity_positions: Dictionary[GridEntity, Vector2i]
 func start_tracking_entity(entity: GridEntity):
 	entity.moved_to_tile.connect(on_entity_moved)
 	entity_positions[entity] = entity.current_grid_pos
+	change_tile_to_team(entity.current_grid_pos, entity.team)
 
 func on_entity_moved(entity: GridEntity,grid_position: Vector2i):
 	if entity_positions[entity] == null:
@@ -17,7 +18,7 @@ func on_entity_moved(entity: GridEntity,grid_position: Vector2i):
 	var position_left_empty = true
 	for entity_to_check in entity_positions:
 		if (entity_to_check != entity) && (entity_positions[entity_to_check] == abandoned_position):
-			position_left_empty = true
+			position_left_empty = false
 	if position_left_empty:
 		change_tile_to_team(abandoned_position,0)
 	change_tile_to_team(grid_position,entity.team)
