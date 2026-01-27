@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1fnqt2uwvygg"]
+
+[sub_resource type="Gradient" id="Gradient_pqu6i"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t5281"]
+gradient = SubResource("Gradient_pqu6i")
+
+[node name="MeleeAttack" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_t5281")

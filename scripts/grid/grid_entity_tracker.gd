@@ -1,5 +1,6 @@
-class_name GridEntityTracker extends TileMapLayer
+class_name GridEntityTracker extends Node
 
+@export var grid_spaces: GameGrid
 @export var chatty: bool
 
 var entity_positions: Dictionary[GridEntity, Vector2i]
@@ -35,4 +36,4 @@ func change_tile_to_team(coords: Vector2i, team: int):
 			atlas_coords = Vector2i(0,1)
 		3:
 			atlas_coords = Vector2i(1,1)
-	set_cell(coords,0,atlas_coords,0)
+	grid_spaces.set_cell(coords,0,atlas_coords,0)

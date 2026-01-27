@@ -10,6 +10,7 @@ func _physics_process(_delta: float) -> void:
 		down = button_state("P1DOWN"),
 		left = button_state("P1LEFT"),
 		right = button_state("P1RIGHT"),
+		action = button_state("P1ACTION"),
 	}
 	p2_input = {
 		vector = Input.get_vector("P2LEFT", "P2RIGHT", "P2UP", "P2DOWN"),
@@ -17,6 +18,7 @@ func _physics_process(_delta: float) -> void:
 		down = button_state("P2DOWN"),
 		left = button_state("P2LEFT"),
 		right = button_state("P2RIGHT"),
+		action = button_state("P2ACTION"),
 	}
 
 func button_state(action_name: String) -> Enums.Button_State:

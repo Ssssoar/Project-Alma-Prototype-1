@@ -2,14 +2,20 @@ class_name GridEntity extends Node2D
 
 @export var floor_tile_map: TileMapLayer
 @export_range(0,3) var team: int ##where 0 means no team
+@export var has_facing: bool
 var current_grid_pos: Vector2i 
+var facing: Enums.Facing
 
 signal moved_to_tile(GridEntity,Vector2i)
 
 func _ready() -> void:
 	current_grid_pos = set_current_grid_pos_from_transform()
-	if floor_tile_map is GridEntityTracker:
-		floor_tile_map.start_tracking_entity(self)
+	if floor_tile_map is GameGrid:
+		floor_tile_map.entity_tracker.start_tracking_entity(self)
+	if has_facing:
+		facing = Enums.Facing.DOWN
+	else:
+		facing = Enums.Facing.NONE
 
 func set_current_grid_pos_from_transform() -> Vector2i:
 	var local_pos = floor_tile_map.to_local(global_position)
@@ -38,3 +44,21 @@ func move_to_pos(target_grid_position: Vector2i, ignore_impassable_terrain: bool
 	var position_as_local_to_map = floor_tile_map.map_to_local(current_grid_pos)
 	global_position = floor_tile_map.to_global(position_as_local_to_map)
 	moved_to_tile.emit(self,target_grid_position)
+
+func set_facing(direction: Vector2i):
+	if !has_facing:
+		facing = Enums.Facing.NONE
+		return
+	else:
+		match(direction):
+			Vector2i.UP:
+				facing = Enums.Facing.UP
+			Vector2i.DOWN:
+				facing = Enums.Facing.DOWN
+			Vector2i.LEFT:
+				facing = Enums.Facing.LEFT
+			Vector2i.RIGHT:
+				facing = Enums.Facing.RIGHT
+			_:
+				facing = Enums.Facing.NONE
+				printerr("[GRID ENTITY] invalid direction given to set facing to. Facing defaulted to NONE")
