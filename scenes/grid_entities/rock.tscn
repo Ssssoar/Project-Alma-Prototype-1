@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ytfsymy2jpc1"]
+
+[ext_resource type="Script" uid="uid://pxl6huffwy50" path="res://scripts/grid_entities/grid_entity.gd" id="1_hbs64"]
+[ext_resource type="Texture2D" uid="uid://dekairr13fnu3" path="res://assets/Rocks.png" id="2_kmrxl"]
+[ext_resource type="Script" uid="uid://d2xrpnet7q5vm" path="res://scripts/grid_entities/health_system.gd" id="3_kmrxl"]
+
+[node name="Rock" type="Node2D"]
+script = ExtResource("1_hbs64")
+team = 3
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("2_kmrxl")
+hframes = 12
+vframes = 12
+frame = 3
+
+[node name="HealthSystem" type="Node" parent="."]
+script = ExtResource("3_kmrxl")
