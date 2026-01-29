@@ -15,5 +15,22 @@ hframes = 12
 vframes = 12
 frame = 3
 
-[node name="HealthSystem" type="Node" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -22.0
+offset_top = -67.0
+offset_right = 18.0
+offset_bottom = -27.0
 script = ExtResource("3_kmrxl")
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -13.5
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
