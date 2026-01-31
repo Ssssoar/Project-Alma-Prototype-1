@@ -5,6 +5,15 @@ class_name GridEntityTracker extends Node
 
 var entity_positions: Dictionary[GridEntity, Vector2i]
 
+func get_entities_at_grid_pos(grid_pos: Vector2i) -> Array[GridEntity]:
+	var ret: Array[GridEntity]
+	for entity in entity_positions:
+		var position = entity_positions[entity]
+		if position == grid_pos:
+			ret.append(entity)
+	return ret
+		
+
 func start_tracking_entity(entity: GridEntity):
 	entity.moved_to_tile.connect(on_entity_moved)
 	entity_positions[entity] = entity.current_grid_pos

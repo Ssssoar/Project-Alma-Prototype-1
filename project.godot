@@ -29,6 +29,10 @@ folder_colors={
 "res://scripts/": "red"
 }
 
+[global_group]
+
+grid="All active grids"
+
 [input]
 
 P1UP={

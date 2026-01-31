@@ -3,21 +3,24 @@ class_name GridEntity extends Node2D
 @export var floor_tile_map: TileMapLayer
 @export_range(0,3) var team: int ##where 0 means no team
 @export var has_facing: bool
+@export var health_node: Health ##OPTIONAL
 var current_grid_pos: Vector2i 
 var facing: Enums.Facing
 
 signal moved_to_tile(GridEntity,Vector2i)
 
 func _ready() -> void:
-	current_grid_pos = set_current_grid_pos_from_transform()
 	if floor_tile_map is GameGrid:
+		current_grid_pos = (floor_tile_map as GameGrid).get_grid_pos_from_node_pos(global_position)
 		floor_tile_map.entity_tracker.start_tracking_entity(self)
+	else:
+		current_grid_pos = set_current_grid_pos_from_transform()
 	if has_facing:
 		facing = Enums.Facing.DOWN
 	else:
 		facing = Enums.Facing.NONE
 
-func set_current_grid_pos_from_transform() -> Vector2i:
+func set_current_grid_pos_from_transform() -> Vector2i: ##kept for insurance but likely won't be necessary
 	var local_pos = floor_tile_map.to_local(global_position)
 	return floor_tile_map.local_to_map(local_pos)
 
@@ -62,3 +65,8 @@ func set_facing(direction: Vector2i):
 			_:
 				facing = Enums.Facing.NONE
 				printerr("[GRID ENTITY] invalid direction given to set facing to. Facing defaulted to NONE")
+
+func receive_attack(damage_ammount: float, attacker: GridEntity):
+	if health_node == null: return
+	if attacker.team != team:
+		health_node.hurt(damage_ammount)

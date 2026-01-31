@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bsq0fjtjk068s" path="res://scripts/grid/grid_entity_tracker.gd" id="2_2s7k2"]
 [ext_resource type="Script" uid="uid://b5s4e5bssauij" path="res://scripts/grid/game_grid.gd" id="2_gnlqp"]
 
-[node name="Spaces" type="TileMapLayer" node_paths=PackedStringArray("entity_tracker")]
+[node name="Spaces" type="TileMapLayer" node_paths=PackedStringArray("entity_tracker") groups=["grid"]]
 tile_map_data = PackedByteArray("AAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAMAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAA=")
 tile_set = ExtResource("1_w88cy")
 script = ExtResource("2_gnlqp")

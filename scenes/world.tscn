@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://thld0yjldq8m"]
+[gd_scene load_steps=4 format=3 uid="uid://thld0yjldq8m"]
 
 [ext_resource type="PackedScene" uid="uid://dphfbs3w7mgcm" path="res://scenes/grid.tscn" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://gtcfeug32fy8" path="res://scenes/grid_entities/players/melee_player.tscn" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://ytfsymy2jpc1" path="res://scenes/grid_entities/rock.tscn" id="3_4wyf3"]
 
 [node name="World" type="Node2D"]
 
@@ -11,5 +12,8 @@ position = Vector2(20, 26)
 [node name="MeleePlayer" parent="." node_paths=PackedStringArray("floor_tile_map") instance=ExtResource("2_4wyf3")]
 position = Vector2(518, 311)
 player_number = 1
-chatty = true
+floor_tile_map = NodePath("../Spaces")
+
+[node name="Rock" parent="." node_paths=PackedStringArray("floor_tile_map") instance=ExtResource("3_4wyf3")]
+position = Vector2(733, 387)
 floor_tile_map = NodePath("../Spaces")

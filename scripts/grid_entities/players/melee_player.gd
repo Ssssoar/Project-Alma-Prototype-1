@@ -1,6 +1,7 @@
 class_name MeleePlayer extends Player
 
 @export var attack_scene: PackedScene
+@export var attack_strength: float
 
 func handle_action_input(input: Enums.Button_State):
 	if input == Enums.Button_State.PRESSED:
@@ -9,15 +10,18 @@ func handle_action_input(input: Enums.Button_State):
 func execute_attack():
 	var slots = get_affected_slots_from_facing(facing)
 	for slot in slots:
-		print("[MELEE PLAYER] spawning attack instance")
-		(floor_tile_map as GameGrid).spawn_at_grid_pos(attack_scene, slot)
+		if chatty:
+			print("[MELEE PLAYER] spawning attack instance")
+		var attack = (floor_tile_map as GameGrid).instantiate_at_grid_pos(attack_scene, slot) as Attack
+		attack.attacker = self
+		attack.attack_strength = attack_strength
+		get_tree().get_root().add_child(attack)
 	##debug
 	if chatty:
 		print("[MELEE PLAYER] Executed melee attack")
 	pass
 
 func get_affected_slots_from_facing(effective_facing: Enums.Facing) -> Array:
-	print(effective_facing)
 	if effective_facing == Enums.Facing.NONE:
 		printerr("[MELEE PLAYER] Tried to attack but there's no facing")
 		return []
