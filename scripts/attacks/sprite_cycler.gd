@@ -21,4 +21,3 @@ func set_sprite_node(sprite_node: Sprite2D, starting_sprite: int, total_sprites:
 	var time_between_frames = timer.wait_time / total_sprites
 	var animation_frame_to_draw = ((timer.wait_time - timer.time_left)/time_between_frames) as int
 	sprite_node.frame = starting_sprite + animation_frame_to_draw
- 

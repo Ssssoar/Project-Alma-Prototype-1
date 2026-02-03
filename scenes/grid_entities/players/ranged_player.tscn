@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://klfxe2og3s80"]
+
+[ext_resource type="PackedScene" uid="uid://ba5qemctve1x5" path="res://scenes/grid_entities/players/player.tscn" id="1_cfrmj"]
+[ext_resource type="Script" uid="uid://d0w1gcusa3ff0" path="res://scripts/grid_entities/players/ranged_player.gd" id="2_lbvnq"]
+[ext_resource type="PackedScene" uid="uid://c1vfer8fb7f7t" path="res://scenes/attacks/ranged_attack.tscn" id="3_1hemh"]
+
+[node name="RangedPlayer" instance=ExtResource("1_cfrmj")]
+script = ExtResource("2_lbvnq")
+attack_scene = ExtResource("3_1hemh")
+attack_strength = 5.0
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color(0.60784316, 0, 1, 1)

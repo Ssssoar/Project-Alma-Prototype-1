@@ -1,19 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://thld0yjldq8m"]
+[gd_scene load_steps=5 format=3 uid="uid://thld0yjldq8m"]
 
 [ext_resource type="PackedScene" uid="uid://dphfbs3w7mgcm" path="res://scenes/grid.tscn" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://gtcfeug32fy8" path="res://scenes/grid_entities/players/melee_player.tscn" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://ytfsymy2jpc1" path="res://scenes/grid_entities/rock.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://klfxe2og3s80" path="res://scenes/grid_entities/players/ranged_player.tscn" id="3_k0juu"]
 
 [node name="World" type="Node2D"]
 
 [node name="Spaces" parent="." instance=ExtResource("1_rwgxs")]
 position = Vector2(20, 26)
 
-[node name="MeleePlayer" parent="." node_paths=PackedStringArray("floor_tile_map") instance=ExtResource("2_4wyf3")]
-position = Vector2(518, 311)
+[node name="Rock" parent="." node_paths=PackedStringArray("floor_tile_map") instance=ExtResource("3_4wyf3")]
+position = Vector2(733, 387)
+floor_tile_map = NodePath("../Spaces")
+
+[node name="RangedPlayer" parent="." node_paths=PackedStringArray("floor_tile_map") instance=ExtResource("3_k0juu")]
+position = Vector2(408, 302)
 player_number = 1
 floor_tile_map = NodePath("../Spaces")
 
-[node name="Rock" parent="." node_paths=PackedStringArray("floor_tile_map") instance=ExtResource("3_4wyf3")]
-position = Vector2(733, 387)
+[node name="MeleePlayer" parent="." node_paths=PackedStringArray("floor_tile_map") instance=ExtResource("2_4wyf3")]
+position = Vector2(296, 385)
 floor_tile_map = NodePath("../Spaces")

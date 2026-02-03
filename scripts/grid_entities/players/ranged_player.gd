@@ -1,4 +1,4 @@
-class_name MeleePlayer extends Player
+class_name RangedPlayer extends Player
 
 @export var attack_scene: PackedScene
 @export var attack_strength: float
@@ -11,7 +11,7 @@ func execute_attack():
 	var slots = get_affected_slots_from_facing(facing)
 	for slot in slots:
 		if chatty:
-			print("[MELEE PLAYER] spawning attack instance")
+			print("[RANGED PLAYER] spawning attack instance")
 		var attack = (floor_tile_map as GameGrid).instantiate_at_grid_pos(attack_scene, slot) as Attack
 		attack.attacker = self
 		attack.attack_strength = attack_strength
@@ -19,17 +19,20 @@ func execute_attack():
 		get_tree().get_root().add_child(attack)
 	##debug
 	if chatty:
-		print("[MELEE PLAYER] Executed melee attack")
+		print("[RANGED PLAYER] Executed melee attack")
 	pass
 
 func get_affected_slots_from_facing(effective_facing: Enums.Facing) -> Array:
 	if effective_facing == Enums.Facing.NONE:
-		printerr("[MELEE PLAYER] Tried to attack but there's no facing")
+		printerr("[RANGED PLAYER] Tried to attack but there's no facing")
 		return []
 	var direction_vector = Enums.facing_to_vector2i(effective_facing)
 	var attack_spots: Array[Vector2i]
 	##TODO make a standardized way to create attack shapes without them being hardcoded
-	attack_spots.append(current_grid_pos + direction_vector)
-	attack_spots.append(attack_spots[0] + Enums.facing_to_vector2i(Enums.clockwise_turn(effective_facing)))
-	attack_spots.append(attack_spots[0] + Enums.facing_to_vector2i(Enums.counterclockwise_turn(effective_facing)))
+	var last_position_found = current_grid_pos + direction_vector
+	while true:
+		attack_spots.append(last_position_found)
+		if floor_tile_map.is_grid_position_blocking_attacks(last_position_found):
+			break
+		last_position_found = last_position_found + direction_vector
 	return attack_spots

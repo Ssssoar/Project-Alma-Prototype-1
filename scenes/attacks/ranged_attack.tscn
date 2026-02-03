@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1vfer8fb7f7t"]
+
+[ext_resource type="PackedScene" uid="uid://c1fnqt2uwvygg" path="res://scenes/attacks/melee_attack.tscn" id="1_s8xvp"]
+
+[node name="MeleeAttack" instance=ExtResource("1_s8xvp")]
+
+[node name="Sprite2D6" parent="Sprites" index="0"]
+frame = 0
+
+[node name="SpriteCycler" parent="." index="2"]
+starting_sprites_list = Array[int]([0, 16, 16])

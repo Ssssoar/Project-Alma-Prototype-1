@@ -4,6 +4,7 @@ class_name GridEntity extends Node2D
 @export_range(0,3) var team: int ##where 0 means no team
 @export var has_facing: bool
 @export var health_node: Health ##OPTIONAL
+@export var blocks_attacks: bool
 var current_grid_pos: Vector2i 
 var facing: Enums.Facing
 
@@ -65,6 +66,20 @@ func set_facing(direction: Vector2i):
 			_:
 				facing = Enums.Facing.NONE
 				printerr("[GRID ENTITY] invalid direction given to set facing to. Facing defaulted to NONE")
+
+func rotation_from_current_facing() -> float: ##in degrees
+	match facing:
+		Enums.Facing.UP:
+			return -90
+		Enums.Facing.DOWN:
+			return 90
+		Enums.Facing.LEFT:
+			return 180
+		Enums.Facing.RIGHT:
+			return 0
+		_:
+			printerr("[GRID ENTITY] tried to get a rotation from a NONE facing")
+			return -25 ##just to make the error noticeable
 
 func receive_attack(damage_ammount: float, attacker: GridEntity):
 	if health_node == null: return
