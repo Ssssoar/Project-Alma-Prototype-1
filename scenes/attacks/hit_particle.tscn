@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://datrnr5tbnh5o"]
+
+[ext_resource type="Texture2D" uid="uid://dhfpjbq5sjhco" path="res://assets/Free Smoke Fx  Pixel 04.png" id="1_jmkcn"]
+[ext_resource type="Script" uid="uid://cvclg8a8esda4" path="res://scripts/attacks/timer_particle.gd" id="1_n3g2h"]
+[ext_resource type="Script" uid="uid://sidsdgcatwi2" path="res://scripts/attacks/sprite_cycler.gd" id="2_n3g2h"]
+
+[node name="HitParticle" type="Node2D"]
+script = ExtResource("1_n3g2h")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprites"]
+modulate = Color(1, 0.41568628, 0, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_jmkcn")
+hframes = 8
+vframes = 10
+frame = 8
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sprites"]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_jmkcn")
+hframes = 8
+vframes = 10
+frame = 8
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="SpriteCycler" type="Node" parent="." node_paths=PackedStringArray("sprite_nodes", "timer")]
+script = ExtResource("2_n3g2h")
+total_sprites_list = Array[int]([3, 2])
+starting_sprites_list = Array[int]([16, 16])
+sprite_nodes = [NodePath("../Sprites/Sprite2D4"), NodePath("../Sprites/Sprite2D5")]
+timer = NodePath("../Timer")

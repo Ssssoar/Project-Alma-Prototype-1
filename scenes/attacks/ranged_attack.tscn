@@ -1,11 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1vfer8fb7f7t"]
+[gd_scene load_steps=4 format=3 uid="uid://c1vfer8fb7f7t"]
 
-[ext_resource type="PackedScene" uid="uid://c1fnqt2uwvygg" path="res://scenes/attacks/melee_attack.tscn" id="1_s8xvp"]
+[ext_resource type="Script" uid="uid://c7fvkgjuvyuwf" path="res://scripts/attacks/attack.gd" id="1_5ivuo"]
+[ext_resource type="Texture2D" uid="uid://dhfpjbq5sjhco" path="res://assets/Free Smoke Fx  Pixel 04.png" id="2_yglmv"]
+[ext_resource type="Script" uid="uid://sidsdgcatwi2" path="res://scripts/attacks/sprite_cycler.gd" id="3_l170k"]
 
-[node name="MeleeAttack" instance=ExtResource("1_s8xvp")]
+[node name="RangedAttack" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_5ivuo")
+timer = NodePath("Timer")
+lifetime = 0.25
 
-[node name="Sprite2D6" parent="Sprites" index="0"]
-frame = 0
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
-[node name="SpriteCycler" parent="." index="2"]
-starting_sprites_list = Array[int]([0, 16, 16])
+[node name="Sprite2D6" type="Sprite2D" parent="Sprites"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_yglmv")
+hframes = 8
+vframes = 10
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpriteCycler" type="Node" parent="." node_paths=PackedStringArray("sprite_nodes", "timer")]
+script = ExtResource("3_l170k")
+total_sprites_list = Array[int]([8])
+starting_sprites_list = Array[int]([0])
+sprite_nodes = [NodePath("../Sprites/Sprite2D6")]
+timer = NodePath("../Timer")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

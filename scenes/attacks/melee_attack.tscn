@@ -19,30 +19,14 @@ hframes = 8
 vframes = 10
 frame = 32
 
-[node name="Sprite2D4" type="Sprite2D" parent="Sprites"]
-modulate = Color(1, 0.41568628, 0, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_hc8h2")
-hframes = 8
-vframes = 10
-frame = 8
-
-[node name="Sprite2D5" type="Sprite2D" parent="Sprites"]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_hc8h2")
-hframes = 8
-vframes = 10
-frame = 8
-
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="SpriteCycler" type="Node" parent="." node_paths=PackedStringArray("sprite_nodes", "timer")]
 script = ExtResource("3_hc8h2")
-total_sprites_list = Array[int]([8, 3, 2])
-starting_sprites_list = Array[int]([8, 16, 16])
-sprite_nodes = [NodePath("../Sprites/Sprite2D6"), NodePath("../Sprites/Sprite2D4"), NodePath("../Sprites/Sprite2D5")]
+total_sprites_list = Array[int]([8])
+starting_sprites_list = Array[int]([8])
+sprite_nodes = [NodePath("../Sprites/Sprite2D6")]
 timer = NodePath("../Timer")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
