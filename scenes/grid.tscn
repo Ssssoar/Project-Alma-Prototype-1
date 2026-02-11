@@ -1,15 +1,23 @@
-[gd_scene load_steps=4 format=4 uid="uid://dphfbs3w7mgcm"]
+[gd_scene load_steps=5 format=4 uid="uid://dphfbs3w7mgcm"]
 
 [ext_resource type="TileSet" uid="uid://s2b3o3hacr6p" path="res://resources/grounds.tres" id="1_w88cy"]
 [ext_resource type="Script" uid="uid://bsq0fjtjk068s" path="res://scripts/grid/grid_entity_tracker.gd" id="2_2s7k2"]
 [ext_resource type="Script" uid="uid://b5s4e5bssauij" path="res://scripts/grid/game_grid.gd" id="2_gnlqp"]
+[ext_resource type="Script" uid="uid://ocsxfmpg0gxe" path="res://scripts/grid/attack_tracker.gd" id="4_gnlqp"]
 
-[node name="Spaces" type="TileMapLayer" node_paths=PackedStringArray("entity_tracker") groups=["grid"]]
+[node name="Spaces" type="TileMapLayer" node_paths=PackedStringArray("entity_tracker", "attack_tracker") groups=["grid"]]
 tile_map_data = PackedByteArray("AAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAACAAUAAAAAAAAAAAACAAMAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAA=")
 tile_set = ExtResource("1_w88cy")
 script = ExtResource("2_gnlqp")
-entity_tracker = NodePath("GridEntityTracker")
+entity_tracker = NodePath("EntityTracker")
+attack_tracker = NodePath("AttackTracker")
 
-[node name="GridEntityTracker" type="Node" parent="." node_paths=PackedStringArray("grid_spaces")]
+[node name="EntityTracker" type="Node" parent="." node_paths=PackedStringArray("grid_spaces")]
 script = ExtResource("2_2s7k2")
 grid_spaces = NodePath("..")
+
+[node name="AttackTracker" type="Node" parent="." node_paths=PackedStringArray("grid")]
+script = ExtResource("4_gnlqp")
+grid = NodePath("..")
+
+[connection signal="entity_movement_registered" from="EntityTracker" to="AttackTracker" method="_on_entity_tracker_entity_movement_registered"]

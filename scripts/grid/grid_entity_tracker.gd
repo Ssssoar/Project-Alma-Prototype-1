@@ -5,6 +5,8 @@ class_name GridEntityTracker extends Node
 
 var entity_positions: Dictionary[GridEntity, Vector2i]
 
+signal entity_movement_registered(entity: GridEntity, new_position: Vector2i)
+
 func get_entities_at_grid_pos(grid_pos: Vector2i) -> Array[GridEntity]:
 	var ret: Array[GridEntity]
 	for entity in entity_positions:
@@ -33,6 +35,7 @@ func on_entity_moved(entity: GridEntity,grid_position: Vector2i):
 		change_tile_to_team(abandoned_position,0)
 	change_tile_to_team(grid_position,entity.team)
 	entity_positions[entity] = grid_position
+	entity_movement_registered.emit(entity, grid_position)
 
 func change_tile_to_team(coords: Vector2i, team: int):
 	var atlas_coords: Vector2i

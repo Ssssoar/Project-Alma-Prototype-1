@@ -8,6 +8,8 @@
 script = ExtResource("1_5ivuo")
 timer = NodePath("Timer")
 lifetime = 0.25
+attack_strength = 5.0
+time_active = 0.1
 
 [node name="Sprites" type="Node2D" parent="."]
 scale = Vector2(2, 2)
