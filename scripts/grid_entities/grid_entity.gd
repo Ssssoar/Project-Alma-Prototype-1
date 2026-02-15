@@ -5,6 +5,7 @@ class_name GridEntity extends Node2D
 @export var has_facing: bool
 @export var health_node: Health ##OPTIONAL
 @export var blocks_attacks: bool
+@export var damage_particle: PackedScene
 var current_grid_pos: Vector2i 
 var facing: Enums.Facing
 
@@ -85,3 +86,7 @@ func receive_attack(damage_ammount: float, attacker: GridEntity):
 	if health_node == null: return
 	if attacker.team != team:
 		health_node.hurt(damage_ammount)
+		if damage_particle != null:
+			if floor_tile_map is GameGrid:
+				var instanced = (floor_tile_map as GameGrid).instantiate_at_grid_pos(damage_particle,current_grid_pos)
+				get_tree().get_root().add_child(instanced)
