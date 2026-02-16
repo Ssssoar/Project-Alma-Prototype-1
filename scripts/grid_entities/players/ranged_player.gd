@@ -4,6 +4,7 @@ class_name RangedPlayer extends Player
 @export var attack_strength: float
 
 func handle_action_input(input: Enums.Button_State):
+	super(input)
 	if input == Enums.Button_State.PRESSED:
 		execute_attack()
 

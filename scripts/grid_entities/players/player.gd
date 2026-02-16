@@ -3,12 +3,14 @@ class_name Player extends GridEntity
 @export_range(1,2) var player_number: int
 @export var sprite_node: DirectionSpriteSwitcher
 @export var chatty: bool
+@export var cooldown_node: CooldownTimer
 
 func _process(_delta: float) -> void:
-	var input_map = get_input()
-	var movement_vector = movement_vector_from_input_map(input_map)
-	handle_movement_input(movement_vector)
-	handle_action_input(input_map.action)
+	if !cooldown_node.on_cooldown:
+		var input_map = get_input()
+		var movement_vector = movement_vector_from_input_map(input_map)
+		handle_movement_input(movement_vector)
+		handle_action_input(input_map.action)
 
 func get_input() -> Dictionary: ##determines which input map to return depending on the player being assigned
 	##copy input dictionary from InputProcessor
@@ -20,8 +22,10 @@ func get_input() -> Dictionary: ##determines which input map to return depending
 	return input_dict
 
 func handle_action_input(input: Enums.Button_State): ##to be overridden in derived classes
-	if input == Enums.Button_State.PRESSED && chatty:
-		print("[PLAYER] Executed generic base class action.")
+	if input == Enums.Button_State.PRESSED:
+		if chatty:
+			print("[PLAYER] Executed generic base class action.")
+		cooldown_node.start_cooldown()
 
 func handle_movement_input(vector: Vector2i):
 	if vector != Vector2i.ZERO:
