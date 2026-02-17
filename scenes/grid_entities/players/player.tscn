@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba5qemctve1x5"]
+[gd_scene load_steps=7 format=3 uid="uid://ba5qemctve1x5"]
 
 [ext_resource type="Script" uid="uid://dxpxvksl7nalc" path="res://scripts/grid_entities/players/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://eijvf5o68pxg" path="res://assets/10555.png" id="2_dqkch"]
 [ext_resource type="Script" uid="uid://b7gr3d5tsrgus" path="res://scripts/direction_sprite_switcher.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://b63ibk3t55qjl" path="res://scripts/grid_entities/players/cooldown_timer.gd" id="4_3owus"]
+[ext_resource type="Texture2D" uid="uid://dogvuyvywolva" path="res://assets/Group 1.png" id="5_sjr4g"]
+[ext_resource type="Script" uid="uid://dk2hp7hk7h8mk" path="res://scripts/ui/cooldown_bar.gd" id="6_yv1xs"]
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("sprite_node", "cooldown_node")]
 script = ExtResource("1_qhqgy")
@@ -27,4 +29,31 @@ one_shot = true
 script = ExtResource("4_3owus")
 cooldown_time = 0.25
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("timer")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -95.0
+offset_right = 262.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.185, 0.185)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+step = 0.01
+value = 100.0
+fill_mode = 5
+texture_under = ExtResource("5_sjr4g")
+texture_progress = ExtResource("5_sjr4g")
+tint_under = Color(1, 1, 1, 0.4392157)
+tint_progress = Color(1, 0, 0, 1)
+script = ExtResource("6_yv1xs")
+timer = NodePath("../CooldownTimer")
+
+[connection signal="cooldown_ended" from="CooldownTimer" to="TextureProgressBar" method="_on_cooldown_timer_cooldown_ended"]
+[connection signal="cooldown_started" from="CooldownTimer" to="TextureProgressBar" method="_on_cooldown_timer_cooldown_started"]
 [connection signal="timeout" from="CooldownTimer" to="CooldownTimer" method="_on_timeout"]
